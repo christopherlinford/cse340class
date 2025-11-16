@@ -7,6 +7,20 @@ async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
+async function addClassification(classification_name) {
+  // ..for insertion to the database.
+  const sql = `INSERT INTO public.classification (classification_name) 
+    VALUES ($1)`;
+
+  try {
+    return await pool.query(sql, [classification_name]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
+
+
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -22,6 +36,24 @@ async function getInventoryByClassificationId(classification_id) {
     return data.rows
   } catch (error) {
     console.error("getclassificationsbyid error " + error)
+  }
+}
+
+/* ***************************
+ *  Get a single inventory item by id
+ * ************************** */
+async function getInventoryByInventoryId(inventoryId) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.inventory
+        INNER JOIN public.classification
+        ON public.inventory.classification_id = public.classification.classification_id
+        WHERE inv_id = $1`,
+      [inventoryId]
+    );
+    return data.rows;
+  } catch (error) {
+    console.error("getInventoryByInventoryId error" + error);
   }
 }
 

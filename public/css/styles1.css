@@ -4,8 +4,7 @@
   --secondary-fg: rgb(236, 229, 209);
   --secondary-bg: rgb(8, 50, 52);
   --pop: rgb(170, 7, 7);
-  --decorative-font: "Anta", sans-serif;
-  --body-font: Verdana, Geneva, Tahoma, sans-serif;
+  
 }
 
 /******* Change Box Model ***************/
@@ -45,7 +44,7 @@ nav {
 }
 
 nav ul {
-  /* Handle this later with a burger */
+  /* later*/
   display: flex;
   flex-wrap: wrap;
 }
@@ -88,7 +87,7 @@ nav ul {
   list-style: none;
   padding: .5rem 2rem .5rem 2rem;
   gap: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial sans-serif;
   margin: 0;
 }
 
@@ -171,7 +170,6 @@ h1, h2, h3, h4 {
   list-style: none;
   padding: 0;
 }
-
 /* Gallery */
 .gallery {
   display: grid;
@@ -180,7 +178,6 @@ h1, h2, h3, h4 {
   padding-left: .1rem;
   padding-right: .1rem;
 }
-
 
 /* Caption Image */
 .caption-image {
@@ -259,178 +256,7 @@ ul#inv-display > li a {
 ul#inv-display > li img {
   width: 100%;
 }
-ul#inv-display > li div.namePrice {
-  padding: 1rem;
-  grid-column: 1/2;
-  grid-row: 1/2;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  text-shadow: 0 0 25px var(--secondary-bg), 0 0 3px black;
-}
 
-  /* Error page styles */
-div.error-display {
-  display: flex;
-  flex-direction: column;
-}
-div.error-display img {
-  width: 50%;
-  align-self: center;
-}
-
-/* Car list styles section */
-section.car-listing {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 1rem;
-  overflow: hidden;
-}
-section.car-listing img {
-  width: 100%;
-  border-bottom: 10px solid var(--secondary-bg);
-}
-section.car-listing div.car-information {
-  grid-row: 2/4;
-  grid-column: 1/2;
-  background-color: #fff6;
-  text-shadow: 0 0 7px white;
-  backdrop-filter: blur(2px);
-  padding: 1rem;
-}
-section.car-listing dl dt {
-  font-size: 1.1rem;
-  font-weight: bolder;
-}
-
-/* 4 */
-.notice {
-  color: rgb(184, 194, 0);
-  list-style: none;
-  background-color: rgba(0, 0, 0, 0.747);
-  padding: .5rem;
-  border-radius: 3px;
-}
-.notice li::before {
-  content: "> ";
-}
-
-/* Login form  */
-.input-box {
-  background-color: var(--secondary-bg);
-  color: var(--secondary-fg);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border-radius: .5rem;
-  box-shadow: 0 .2rem .5rem rgba(0, 0, 0, 0.298);
-  margin-bottom: 1rem;
-  width: 100%;
-  max-width: 500px;
-  align-self: center;
-}
-.input-box label {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  position: relative;
-}
-.input-box input, .input-box select, .input-box textarea, #classificationList {
-  padding: .5rem;
-  border: none;
-}
-.input-box input::placeholder, .input-box select::placeholder, .input-box textarea::placeholder {
-  color: rgba(0, 0, 0, 0.27)
-}
-.input-box input:invalid, .input-box textarea:invalid, .input-box select:invalid {
-  border-right: 5px solid red;
-}
-.input-box input[type="submit"] {
-  font-size: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  width: fit-content;
-  align-self: center;
-  background-color: var(--pop);
-  color: white;
-  border: none;
-  border-radius: .5rem;
-  box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.368);
-}
-.input-box .reveal-button {
-  color: transparent; /* To make wave happy */
-  position: absolute;
-  bottom: 0;
-  right: 5px;
-  background-color: transparent;
-  background-image: url("/images/site/eye_open.svg");
-  background-size: contain;
-  height: 2rem;
-  width: 2rem;
-  border: 0;
-}
-.input-box .reveal-button.active {
-  background-image: url("/images/site/eye_closed.svg");
-}
-.fine-print {
-  font-size: .75em;
-}
-
-/* Inventory display */
-
-#inventoryDisplay tr td:nth-child(1) {
-  width: auto;
-}
-#inventoryDisplay tr td:nth-child(2) {
-  width: 75px;
-  text-align: end;
-}
-#inventoryDisplay tr td:nth-child(3) {
-  width: 75px;
-  text-align: end;
-}
-
-/* Message view */
-.message-view {
-  background-color: rgba(255, 255, 255, 0.436);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.message-view dl {
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  margin: 0;
-  gap: 1rem;
-
-}
-.message-view dl dt, .message-view dl dd {
-  margin: 0;
-}
-.message-view dl dt {
-  font-weight: bold;
-}
-.message-view dl dt:after {
-  content: ":";
-}
-.message-pane {
-  white-space: pre-wrap;
-  font-family: var(--body-font);
-}
-
-table {
-  border: 1px solid rgba(0, 0, 0, 0.269);
-  padding: .5rem;
-  box-shadow: 0 3px 13px rgba(0, 0, 0, 0.107) inset;
-}
-table thead tr th {
-  border-bottom: 2px solid var(--secondary-bg);
-}
 
 /* Button strip style */
 .button-strip {
@@ -458,7 +284,7 @@ table thead tr th {
 .button-strip img {
   height: 100%;
   width: 100%;
-  pointer-events: none;
+  
 }
 .button-strip *:first-child {
   border-radius: .5rem 0 0 .5rem;

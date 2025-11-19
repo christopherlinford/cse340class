@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const utilities = require("../utilities")
+const utilities = require("../utilities/index")
 
 // Static Routes
-// Set up "public" folder / subfolders for static files
+// folderd "public" folder / subfolders for static files
 router.use(express.static("public"));
 router.use("/css", utilities.handleErrors(express.static(__dirname + "public/css")));
 router.use("/js", utilities.handleErrors(express.static(__dirname + "public/js")));

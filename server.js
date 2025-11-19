@@ -12,11 +12,16 @@ const app = express()
 const static = require("./routes/static.js")
 const baseController = require("./controllers/baseController.js")
 const inventoryRoute = require("./routes/inventoryRoute.js")
-const utilities =require("./utilities/index.js")
+const utilities =require("./utilities/index1.js")
 const intentionalErrorRoute = require("./routes/intentionalErrorRoute.js");
+const accountRoute = require('./routes/accountRoute.js');
+const messageRoute = require('./routes/messageRoute.js');
 //const pool = require("./database/index.js")
 const session = require("express-session")
 const pool = require('./database/')
+
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
 
 
@@ -44,6 +49,17 @@ app.use(function(req, res, next){
 
 
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ // for parsing application/x-www-form-urlencoded
+  extended: true
+}));
+// Cookie parser
+app.use(cookieParser())
+// JWT checker
+app.use(utilities.checkJWTToken);
+
+
+
 
 
 
@@ -57,17 +73,26 @@ app.set("layout", "./layouts/layout"); // Not at view root
 /* ***********************
  * Routes
  *************************/
-app.use(static);
+// app.use(static);
+app.use(require("./routes/static"))
 // Index route
-app.get("/", utilities.handleErrors(baseController.buildHome));
+app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
-app.use("/inv", inventoryRoute);
+app.use("/inv", require("./routes/inventoryRoute"))
+//Acccount routes
+app.use("/account", require("./routes/accountRoute"))
+
+// Message routes
+app.use("/message", messageRoute);
+
+app.use
 // Intentional error route. Used for testing
-app.use("/ierror", intentionalErrorRoute);
+app.use("/ierror", intentionalErrorRoute)
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status: 404, message: 'Unfortunately, we don\'t have that page in stock.'})
-})
+  next({ status: 404, message: 'Sorry, we have lost that page.' })
+});
 
 /* ***********************
 * Express Error Handler
@@ -84,8 +109,6 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
-
-
 
 /* ***********************
  * Local Server Information

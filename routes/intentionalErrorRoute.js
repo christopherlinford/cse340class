@@ -1,8 +1,8 @@
 // Needed resources
-const express = require("express");
-const router = new express.Router();
-const intentionalErrorController = require("../controllers/intentionalErrorController");
-const utilities = require("../utilities");
+const express = require("express")
+const router = new express.Router()
+const intentionalErrorController = require("../controllers/intentionalErrorController")
+const utilities = require("../utilities/index")
 
 // Middleware causes an error
 router.use("/", utilities.handleErrors(async (req, res, next) => {

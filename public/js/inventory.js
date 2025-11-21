@@ -1,6 +1,6 @@
 "use strict";
 
-// Get a list of items in inventory based on the classification_id
+// Get list of items in inventory based on the classification_id
 let classificationList = document.querySelector("#classificationList");
 classificationList.addEventListener("change", listChange);
 listChange(); // Do it once on load.

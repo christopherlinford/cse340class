@@ -146,9 +146,7 @@ async function accountLogin(req, res) {
 
 /**
  * Process account management get request
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
+
  */
 async function buildAccountManagementView(req, res) {
   let nav = await utilities.getNav();
@@ -222,9 +220,7 @@ async function updateAccount(req, res) {
     );
 
     //Update the cookie accountData
-    // TODO: Better way to do this?
-
-    const accountData = await accountModel.getAccountById(account_id); // Get it from db so we can remake the cookie
+    const accountData = await accountModel.getAccountById(account_id); // remake the cookie
     delete accountData.account_password;
     res.locals.accountData.account_firstname = accountData.account_firstname; // So it displays correctly
     utilities.updateCookie(accountData, res); // Remake the cookie with new data

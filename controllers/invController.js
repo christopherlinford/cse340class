@@ -5,9 +5,6 @@ const invCont = {};
 
 /**
  * Build inventory by classification view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId;
@@ -34,13 +31,9 @@ invCont.buildByClassificationId = async function (req, res, next) {
 
 /**
  * Build the view to display a single vehicle
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildByInventoryId = async function (req, res, next) {
   const inventoryId = req.params.inventoryId;
-  //const data = await invModel.getInventoryByInventoryId(inventoryId + 5); // Buggy code
   const data = await invModel.getInventoryByInventoryId(inventoryId); // Clean code
   const listing = await utilities.buildItemListing(data[0]);
   let nav = await utilities.getNav();
@@ -58,10 +51,6 @@ invCont.buildByInventoryId = async function (req, res, next) {
  **********************************/
 
 /**
- * Build the main vehicle management view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildManagementView = async function (req, res, next) {
   let nav = await utilities.getNav();
@@ -91,9 +80,6 @@ invCont.buildAddClassification = async function (req, res, next) {
 };
 /**
  * Handle post request to add a vehicle classification
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.addClassification = async function (req, res, next) {
   const { classification_name } = req.body;
@@ -124,9 +110,6 @@ invCont.addClassification = async function (req, res, next) {
 
 /**
  * Build the add inventory view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildAddInventory = async function (req, res, next) {
   const nav = await utilities.getNav();
@@ -142,9 +125,6 @@ invCont.buildAddInventory = async function (req, res, next) {
 
 /**
  * Handle post request to add a vehicle to the inventory along with redirects
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.addInventory = async function (req, res, next) {
   const nav = await utilities.getNav();
@@ -188,7 +168,7 @@ invCont.addInventory = async function (req, res, next) {
       errors: null,
     });
   } else {
-    // This seems to never get called. Is this just for DB errors?
+    // This seems to never get called. DB errors 
     req.flash("notice", "There was a problem.");
     res.render("inventory/addInventory", {
       title: "Add Vehicle",
@@ -215,9 +195,6 @@ invCont.getInventoryJSON = async (req, res, next) => {
 
 /**
  * Build the edit inventory view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildEditInventory = async function (req, res, next) {
   const inventory_id = parseInt(req.params.inventoryId);
@@ -250,9 +227,6 @@ invCont.buildEditInventory = async function (req, res, next) {
 
 /**
  * Handle post request to update a vehicle to the inventory along with redirects
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.updateInventory = async function (req, res, next) {
   const nav = await utilities.getNav();
@@ -317,9 +291,6 @@ invCont.updateInventory = async function (req, res, next) {
 
 /**
  * Build the delete inventory view
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.buildDeleteInventory = async function (req, res, next) {
   const inventory_id = parseInt(req.params.inventoryId);
@@ -346,9 +317,6 @@ invCont.buildDeleteInventory = async function (req, res, next) {
 
 /**
  * Handle post request to delete a vehicle from the inventory along with redirects
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- * @param {import('express').NextFunction} next
  */
 invCont.deleteInventory = async function (req, res, next) {
   const nav = await utilities.getNav();

@@ -1,7 +1,7 @@
 const utilities = require("../utilities/index")
 const baseController = {}
 
-// Build Home view 
+// Build Homeview 
 baseController.buildHome = async function(req, res){
     const nav = await utilities.getNav()
     req.flash("notice", "This is a flash message.")

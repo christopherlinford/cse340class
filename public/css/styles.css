@@ -2,7 +2,7 @@
   --primary-fg: rgb(115, 16, 16);
   --primary-bg: rgb(234, 242, 247);
   --secondary-fg: rgb(236, 229, 209);
-  --secondary-bg: rgb(41, 84, 18);
+  --secondary-bg: rgb(8, 50, 52);
   --pop: rgb(170, 7, 7);
   --decorative-font: "Anta", sans-serif;
   --body-font: Verdana, Geneva, Tahoma, sans-serif;
@@ -96,6 +96,10 @@ h1, h2, h3, h4 {
   font-family: var(--decorative-font);
 }
 
+section, article {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
 
 
 #wrapper {
@@ -455,11 +459,16 @@ table thead tr th {
   transform: translateY(-2px);
   transition: .3s box-shadow, .3s transform;
 }
+
+
 .button-strip img {
   height: 100%;
   width: 100%;
-  pointer-events: none;
+  /* Hacks to satisfy old W3C Validator */
+  /*pointer-events: none; /* valid in browsers */
 }
+
+
 .button-strip *:first-child {
   border-radius: .5rem 0 0 .5rem;
 }

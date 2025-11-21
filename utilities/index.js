@@ -5,18 +5,6 @@ require("dotenv").config();
 
 const Util = {};
 
-/**
-* @typedef {Object} Message
-* @property {number} message_id
-* @property {string} message_subject
-* @property {string} message_body
-* @property {Date} message_created
-* @property {number} message_to
-* @property {number} message_from
-* @property {boolean} message_read
-* @property {boolean} message_archived
-*/
-
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -266,8 +254,6 @@ Util.checkAuthorizationManager = (req, res, next) => {
 
 /**
  * Build an html table string from the message array
- * @param {Array<Message>} messages 
- * @returns 
  */
 Util.buildInbox = (messages) => {
   inboxList = `

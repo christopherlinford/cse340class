@@ -47,12 +47,12 @@ app.use(function(req, res, next){
   next()
 })
 
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ // for parsing application/x-www-form-urlencoded
   extended: true
 }));
+
+//unit 5 login activity
 // Cookie parser
 app.use(cookieParser())
 // JWT checker

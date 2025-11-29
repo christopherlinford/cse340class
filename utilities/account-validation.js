@@ -8,7 +8,7 @@ const validate = {};
  * ********************************* */
 validate.registrationRules = () => {
   return [
-    // firstname is required and must be string
+    // firstname is required must be string
     body("account_firstname")
       .trim()
       .escape()
@@ -16,7 +16,7 @@ validate.registrationRules = () => {
       .isLength({ min: 1 })
       .withMessage("Please provide a first name."), // on error this message is sent.
 
-    // lastname is required and must be string
+    // lastname is required must be string
     body("account_lastname")
       .trim()
       .escape()
@@ -46,7 +46,7 @@ validate.registrationRules = () => {
  * ********************************* */
 validate.updateRules = () => {
   return [
-    // firstname is required and must be string
+    // firstname is required must be string
     body("account_firstname")
       .trim()
       .escape()
@@ -54,7 +54,7 @@ validate.updateRules = () => {
       .isLength({ min: 1 })
       .withMessage("Please provide a first name."), // on error this message is sent.
 
-    // lastname is required and must be string
+    // lastname is required must be string
     body("account_lastname")
       .trim()
       .escape()

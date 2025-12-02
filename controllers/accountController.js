@@ -11,24 +11,6 @@ const accountModel = require("../models/account-model");
 const messageModel = require("../models/message-model");
 
 
-
-
-/****
- * Deliver login view
- */
-
-// async function buildLogin(req, res, next) {
-//    let nav = await utilities.getNav()
-//   res.render("account/login", {
-//      title: "Login",
-//      nav,
-//  })
-    
-// }
-
-
-
-
 /* ****************************************
  *  Deliver registration view
  * *************************************** */
@@ -102,7 +84,7 @@ async function registerAccount(req, res) {
  * *************************************** */
 async function buildLogin(req, res, next) {
   let nav = await utilities.getNav();
-  // req.flash("notice", "This is a flash message.!!!@2")
+  // req.flash("notice", "This is a flash message.!")
   res.render("account/login", {
     title: "Login",
     errors: null,
@@ -137,7 +119,7 @@ async function accountLogin(req, res) {
       return res.redirect("/account/");
     } // Need to have a wrong password option
     else {
-      req.flash("notice", "Please check your credentials and try again."); // Login was hanging with bad password but correct id
+      req.flash("notice", "Please check your credentials and try again."); // Login was bad password but correct id
       res.redirect("/account/");
     }
   } catch (error) {
@@ -196,7 +178,7 @@ async function buildUpdate(req, res, next) {
 
 /* ****************************************
  *  Process account update post
- * *************************************** */
+ * *************************************** *
 async function updateAccount(req, res) {
   let nav = await utilities.getNav();
   const {
@@ -223,7 +205,7 @@ async function updateAccount(req, res) {
     //Update the cookie accountData
     const accountData = await accountModel.getAccountById(account_id); // remake the cookie
     delete accountData.account_password;
-    res.locals.accountData.account_firstname = accountData.account_firstname; // So it displays correctly
+    res.locals.accountData.account_firstname = accountData.account_firstname; // displays
     utilities.updateCookie(accountData, res); // Remake the cookie with new data
 
     res.status(201).render("account/account-management", {
@@ -244,11 +226,60 @@ async function updateAccount(req, res) {
     });
   }
 }
+*/
+
+
+// fixed version update account
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav();
+  const {
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+  } = req.body;
+
+  const regResult = await accountModel.updateAccount(
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+  );
+
+  if (regResult) {
+    req.flash("notice", `Congratulations, you've updated ${account_firstname}.`);
+
+    const accountData = await accountModel.getAccountById(account_id);
+    delete accountData.account_password;
+
+    utilities.updateCookie(accountData, res);
+
+    return res.redirect("/account/");  // FIX
+  }
+
+  req.flash("notice", "Sorry, the update failed.");
+  return res.status(501).render("account/update", {
+    title: "Update",
+    errors: null,
+    account_id,
+    account_firstname,
+    account_lastname,
+    account_email,
+    nav,
+  });
+}
+
+
+
+
+
+
+
 
 
 /* ****************************************
  *  Process account password update post
- * *************************************** */
+ * *************************************** 
 async function updatePassword(req, res) {
   let nav = await utilities.getNav();
 
@@ -257,7 +288,7 @@ async function updatePassword(req, res) {
   // Hash the password before storing.
   let hashedPassword;
   try {
-    // regular password and cost (salt is generated automatically)
+    // regular password, (salt is generated automatically)
     hashedPassword = await bcrypt.hashSync(account_password, 10);
   } catch (error) {
     req.flash(
@@ -291,7 +322,36 @@ async function updatePassword(req, res) {
       nav,
     });
   }
+} */
+
+// fixed update password
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav();
+  const { account_id, account_password } = req.body;
+
+  // Hash password
+  const hashedPassword = bcrypt.hashSync(account_password, 10);
+
+  const regResult = await accountModel.updatePassword(account_id, hashedPassword);
+
+  if (regResult) {
+    req.flash("notice", "Password updated successfully.");
+    return res.redirect("/account/");   // ⬅ FIX
+  }
+
+  req.flash("notice", "Sorry, the password update failed.");
+  return res.status(501).render("account/update", {
+    title: "Update",
+    nav,
+    errors: null,
+  });
 }
+
+
+
+
+
+
 
 
 module.exports = { 
